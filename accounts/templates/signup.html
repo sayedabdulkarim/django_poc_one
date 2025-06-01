@@ -4,29 +4,48 @@
 
 {% block content %}
 <h2 style="text-align:center; margin-bottom: 24px;">Sign Up</h2>
+
+<!-- Display messages -->
+{% if messages %}
+{% for message in messages %}
+<div class="message {{ message.tags }}"
+    style="padding: 12px; margin-bottom: 16px; border-radius: 8px; text-align: center;">
+    {{ message }}
+</div>
+{% endfor %}
+<style>
+    .message.error {
+        background-color: #fed7d7;
+        color: #9b2c2c;
+        border: 1px solid #feb2b2;
+    }
+
+    .message.success {
+        background-color: #c6f6d5;
+        color: #2d5016;
+        border: 1px solid #9ae6b4;
+    }
+</style>
+{% endif %}
+
 <form method="post" style="display: flex; flex-direction: column; gap: 18px;">
     {% csrf_token %}
     <input type="text" name="username" placeholder="Username" required
         style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;">
-    <input type="password" name="password1" placeholder="Password" required
+    <input type="email" name="email" placeholder="Email (Optional)"
         style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;">
-    <input type="password" name="password2" placeholder="Confirm Password" required
+    <input type="password" name="password" placeholder="Password (min 6 characters)" required
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;">
+    <input type="password" name="confirm_password" placeholder="Confirm Password" required
         style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;">
     <button type="submit"
         style="padding: 12px; border-radius: 8px; background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; border: none; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s;">
         Sign Up
     </button>
-    {% if form.errors %}
-    <div style="color: #e53e3e; text-align: center;">
-        {% for field in form %}
-        {% for error in field.errors %}
-        {{ error }}<br>
-        {% endfor %}
-        {% endfor %}
-        {% for error in form.non_field_errors %}
-        {{ error }}<br>
-        {% endfor %}
-    </div>
-    {% endif %}
 </form>
+
+<p style="text-align: center; margin-top: 20px;">
+    Already have an account? <a href="/accounts/login/" style="color: #667eea; text-decoration: none;">Login
+        here</a>
+</p>
 {% endblock %}
