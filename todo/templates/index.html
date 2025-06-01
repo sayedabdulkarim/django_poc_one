@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TODO App</title>
+    <style>
+        /* Your CSS here, e.g., */
+        body {
+            font-family: Arial;
+            background: #111;
+            color: #eee;
+        }
+
+        .todo {
+            margin: 10px 0;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>TODO List</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Add new todo" required />
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        {% for todo in todos %}
+        <li class="todo {% if todo.completed %}completed{% endif %}">
+            {{ todo.title }}
+            {% if not todo.completed %}
+            <a href="{% url 'complete' todo.id %}">[Complete]</a>
+            {% endif %}
+            <a href="{% url 'delete' todo.id %}">[Delete]</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
