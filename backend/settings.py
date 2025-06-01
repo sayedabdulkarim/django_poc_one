@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 ]
 
 ## external apps
-INSTALLED_APPS += ['todo']
+INSTALLED_APPS += ['todo', 'accounts']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

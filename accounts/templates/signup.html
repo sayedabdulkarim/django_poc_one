@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up | TODO App{% endblock %}
+
+{% block content %}
+<h2 style="text-align:center; margin-bottom: 24px;">Sign Up</h2>
+<form method="post" style="display: flex; flex-direction: column; gap: 18px;">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username" required
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;">
+    <input type="password" name="password1" placeholder="Password" required
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;">
+    <input type="password" name="password2" placeholder="Confirm Password" required
+        style="padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size: 1rem;">
+    <button type="submit"
+        style="padding: 12px; border-radius: 8px; background: linear-gradient(90deg, #667eea, #764ba2); color: #fff; border: none; font-size: 1rem; font-weight: bold; cursor: pointer; transition: background 0.2s;">
+        Sign Up
+    </button>
+    {% if form.errors %}
+    <div style="color: #e53e3e; text-align: center;">
+        {% for field in form %}
+        {% for error in field.errors %}
+        {{ error }}<br>
+        {% endfor %}
+        {% endfor %}
+        {% for error in form.non_field_errors %}
+        {{ error }}<br>
+        {% endfor %}
+    </div>
+    {% endif %}
+</form>
+{% endblock %}

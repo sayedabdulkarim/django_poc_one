@@ -22,4 +22,6 @@ urlpatterns = [
     ##
     # Include the URLs from the todo app
     path('', include('todo.todo_urls')),    
+    # Include the URLs from the accounts app
+    path('/accounts/', include('accounts.accounts_urls')),
 ]
